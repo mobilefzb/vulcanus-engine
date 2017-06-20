@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ServiceHealthChecker
+metadate:
+  name: Vpc.Create
+  version: v1
+  labels:
+    Vulcanus-Inner-Services: True
+spec:
+  selector:
+    serivcename: Vpc.create
+  input:
+    Driver: HTTPClient
+    URL: http://httpbin.org/post
+    Method: POST
+    PayLoads:
+      Headers:
+        AccessKey: qwertyuiop==
+      Bodys:
+        RegionId: cn-beijing
+        CidrBlock: 172.16.0.0/16
+        VpcName: vsw-test-name
+        Description: vsw-desc
+  output:
+    VpcId: req-xxxx
+    VRouterId: vsw-cccc
+    RouteTableId: xxxxx

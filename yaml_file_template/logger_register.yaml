@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ServiceRegister
+metadate:
+  name: ThirdParty-logging
+spec:
+  input:
+    Driver: RabbitMQClient
+    BrokerServerHost: localhost
+    ExchangeName: topic_ex
+    ExchangeType: topic
+    RoutingKey: vpc.create
+    PayLoads:
+      Status: OK
+      Message: just a log

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ServiceRegister
+metadate:
+  name: Vsw.Create
+  labels:
+    Vulcanus-Inner-Services: True
+spec:
+  input:
+    Driver: HTTPClient
+    URL: http://localhost:5000
+    Method: POST
+    PayLoads:
+      Headers:
+        AccessKey: qwertyuiop==
+      Bodys:
+        ZoneId: cn-beijing
+        CidrBlock: 172.16.0.0/16
+        VpcId: vpc-xxxx
+        VSwitchName: vsw-test-name
+        Description: vsw-desc
+  output:
+    VSwitchId: vsw-xxx

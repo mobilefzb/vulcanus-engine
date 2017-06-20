@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ServicePublisher
+metadate:
+  name: wordpress-tomcat
+spec:
+  selector:
+     InstanceId: i-2ze3hi91uwjqq1gljeqa
+  spec:
+     ports:
+     - port: 80
+       targetPort: 8080

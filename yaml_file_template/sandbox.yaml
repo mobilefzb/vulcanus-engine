@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: VpcSandBox
+metadate:
+  name: mix_vpc
+  label:
+    content:
+      - vda
+      - rds
+      - web
+      - nat_gw
+spec:
+  Vpc.Create:
+    Headers:
+      AccessKey: qwertyuiop==
+    Bodys:
+      RegionId: cn-beijing
+      CidrBlock: 172.16.0.0/16
+      VpcName: test_vpc
+      Description: vsw-desc
+
+  Vsw.Create:
+    Headers:
+      AccessKey: qwertyuiop==
+    Bodys:
+      ZoneId: cn-beijing
+      CidrBlock: 172.16.0.0/16
+      VSwitchName: vsw-test-name
+      Description: vsw-desc
+      VpcId:
+        selector:
+          services: Vpc.Create
+          VpcName: test_vpc
+          output_attr: VpcId
+
+  Ecs.Create:
+    Headers:
+      AccessKey: qwertyuiop==
+    Bodys:
+      VSwitchId:
+        selector:
+          services: Vsw.Create
+          VSwitchName: vsw-test-name
+          output_attr: VSwitchId
+      InstanceName: nova_vda
+      Description: nova_vda_desc
+      ImageId: suse11sp3_64_20G_aliaegis_20150428.vhd
+      InstanceType: ecs.t1.xsmall
+      SecurityGroupId:
+      InternetChargeType: PayByBandwidth
+      InternetMaxBandwidthIn: 200
+      InternetMaxBandwidthOut: 100
+      HostName: nova-bbc
+      Password: Newmed!@s0bey
+      IoOptimized: optimized
+      SystemDisk.Category: cloud
+      SystemDisk.Size: 20
+      SystemDisk.DiskName: disk_a_1
+      SystemDisk.Description: disk_a_1_desc
+      PrivateIpAddress: 172.16.1.9
+      InstanceChargeType: PrePaid
+      Period: 12
+      AutoRenew: True
+      AutoRenewPeriod: 1
+      KeyPairName:
+
+

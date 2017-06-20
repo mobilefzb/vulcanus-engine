@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ServiceRegister
+metadata:
+  name: Vpc.Create
+  owner: wangxiang
+  version: v1
+  foo: bar
+  env: test
+  labels:
+    Vulcanus-Inner-Services: True
+spec:
+  input:
+    BasicInfos:
+      Driver: HTTPClient
+      URL: http://localhost:9999
+      Method: POST
+    PayLoads:
+      Headers:
+        AccessKey: qwertyuiop==
+      Bodys:
+        RegionId: cn-beijing
+        CidrBlock: 172.16.0.0/16
+        VpcName: vsw-test-name
+        Description: vsw-desc
+  output:
+    VpcId: req-xxxx
+    VRouterId: vsw-cccc
+    RouteTableId: xxxxx
